@@ -1,5 +1,5 @@
 # 日本語論文をLaTeXで書いて、textlintをするためのテンプレート
-
+[関連記事](https://qiita.com/k_uki512/items/728605e4dc25b2706baf)
 ## 使い方
 ### Dockerイメージのpull
 　以下のコマンドを実行しLaTeXの環境構築がされたimageをローカルにpullします。
