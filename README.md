@@ -1,5 +1,50 @@
 # 日本語論文をLaTeXで書いて、textlintをするためのテンプレート
 
+## 使い方
+### Dockerイメージのpull
+　以下のコマンドを実行しLaTeXの環境構築がされたimageをローカルにpullします。
+
+```
+docker pull ghcr.io/being24/latex-docker:latest
+```
+pullできたかの確認
+以下のコマンドを入力しimageの一覧を表示します。  
+```
+docker images
+```
+実行後に以下のものがあればpullは完了しています。  
+```
+ghcr.io/being24/latex-docker latest 36c0de73963d 3 months ago 1.65GB
+```
+### main.texの編集
+編集が可能か確認を行うために、クローンしたディレクトリ内にある "main.tex" の編集を行います。
+### docker imageの起動とpdfファイルの作成
+作成したmain.texをpdfファイルに変換するために、先ほどpullした docker imageを起動します。
+以下のコマンドを実行します。
+```
+docker run --rm --name latex-template-ja -it -v ${PWD}:/workdir ghcr.io/being24/latex-docker
+```
+コマンドの解説をします
+
+```docker run``` : コンテナでコマンドを実行
+```--rm``` ：コンテナの終了時にコンテナを削除
+- ```name``` ：コンテナに名前を付ける（ここだと"latex-template-ja"）
+- ```it``` ：コンテナ内に入りshellを起動する。
+- ```v ${PWD}:/workdir```： ローカルのディレクトリをworkdirにマウントする。
+実行後、コンテナ内のshellが起動されたら、以下のコマンドを実行します。
+```
+uplatex main.tex
+```
+このコマンドを実行することで、texファイルがコンパイルされdviファイルが作成されます。
+今回だとmain.dviというファイルが作成されているか確認してください。  
+
+　次に、今作成したdviファイルをpdfファイルに変換します。  
+```
+dvipdfmx main
+```
+このコマンドを実行することでdviファイルをpdfファイルに変換することができます。
+### pdfファイルの確認
+　作成されたpdfファイルを確認します。
 ## 機能
 
 * 個人環境にLaTeX workshopを構築せず、dockerでビルドします
