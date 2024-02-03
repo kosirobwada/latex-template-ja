@@ -24,6 +24,10 @@ ghcr.io/being24/latex-docker latest 36c0de73963d 3 months ago 1.65GB
 ```
 docker run --rm --name latex-template-ja -it -v ${PWD}:/workdir ghcr.io/being24/latex-docker
 ```
+dockerを起動している場合は、以下のコマンドを実行します。
+```
+docker exec -it latex-template-ja /bin/bash
+```
 コマンドの解説をします
 
 ```docker run``` : コンテナでコマンドを実行
